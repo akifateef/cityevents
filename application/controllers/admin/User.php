@@ -8,11 +8,17 @@ class User extends CI_Controller {
 
       $this->load->model('user_model');
       $this->data = array();
+      // if(isset($_SESSION)){
+      //    redirect(base_url().'admin/user/login','refresh');
+      // }
+      // else{
+      //    redirect(base_url().'admin/user/index','refresh');
+      // }
+   
    }
 
    public function index() {
-      print_r($_SESSION);
-      echo 'index';
+      $this->load->view('admin/dashboard',$this->data);
    }
 
    public function login() {
@@ -46,7 +52,7 @@ class User extends CI_Controller {
    public function logout()
    {
       session_destroy();
-     echo'session destroyed';
+      redirect(base_url().'admin/user/login','refresh');
 
    }
 
