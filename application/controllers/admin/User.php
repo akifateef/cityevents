@@ -20,6 +20,11 @@ class User extends CI_Controller {
    public function index() {
       $this->load->view('admin/dashboard',$this->data);
    }
+   public function list() {
+      
+      $this->data['users'] = $this->user_model->list();
+      $this->load->view('admin/view_users',$this->data);
+   }
 
    public function login() {
 
@@ -29,14 +34,14 @@ class User extends CI_Controller {
          redirect(base_url().'admin/user/index','refresh');
       }
 
-         $login_detail['email'] = $this->input->get_post('email');
+         $login_detail['user_name'] = $this->input->get_post('user_name');
          $login_detail['password'] = $this->input->get_post('password');
          if($user_detail = $this->user_model->check_login($login_detail)) // if login suceess
          {
                   $this->load->library('session');
                  # Set session here and redirect user
                   $_SESSION['user'] = $user_detail;
-                  $redirect_url = isset($_SESSION['redirect_to_last_url']) ? $_SESSION['redirect_to_last_url'] : base_url().'admin/index';
+                  $redirect_url = isset($_SESSION['redirect_to_last_url']) ? $_SESSION['redirect_to_last_url'] : base_url().'admin/user/index';
                   unset($_SESSION['redirect_to_last_url']);
                   redirect($redirect_url,'location');
 

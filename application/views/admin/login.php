@@ -11,8 +11,8 @@ $this->load->view('admin/components/header');
         <form name="userlogin" method="post" action="<?php echo base_url()?>admin/user/login">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-              <label for="inputEmail">Email address</label>
+              <input type="user_name" name="user_name" class="form-control" placeholder="User Name" required="required" autofocus="autofocus">
+              <label for="inputEmail">User Name</label>
             </div>
           </div>
           <div class="form-group">
