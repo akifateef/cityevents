@@ -8,25 +8,57 @@ class User extends CI_Controller {
 
       $this->load->model('user_model');
       $this->data = array();
-      // if(isset($_SESSION)){
-      //    redirect(base_url().'admin/user/login','refresh');
-      // }
-      // else{
-      //    redirect(base_url().'admin/user/index','refresh');
-      // }
-   
    }
 
    public function index() {
+      
       $this->load->view('admin/dashboard',$this->data);
    }
    public function list() {
-      
+     
       $this->data['users'] = $this->user_model->list();
       $this->load->view('admin/view_users',$this->data);
    }
 
-   public function login() {
+   public function update() {
+
+      $id = $this->input->get_post('id');
+   
+		$this->form_validation->set_error_delimiters('<div>', '</div>');
+	
+		$this->form_validation->set_rules('f_name', 'Name', 'required|trim');
+		
+		// If the validation worked
+		if ($this->form_validation->run())
+		{
+				$password=$this->input->get_post('password');
+				$data['f_name'] = $this->input->get_post('f_name');
+				$data['email'] = $this->input->get_post('email');
+            $data['l_name'] = $this->input->get_post('l_name');
+			   $user_id = $this->input->get_post('id');
+            if($password!='') {
+					$data['password'] = md5($password);
+				}
+				
+				$data['contact_no'] = $this->input->get_post('contact_no');
+				
+				if($this->user_model->update($user_id,$data))
+				{
+					
+					$_SESSION['msg_success'][] = 'Profile Updated...';
+					redirect('admin/user/list');	
+				}
+			
+		
+      }
+		$this->data['id'] = $id;
+		
+		$this->data['update_data'] = $this->user_model->get_user_by_id($id);
+
+		$this->load->view('admin/user_details', $this->data);
+	}
+	
+      public function login() {
 
       # if user is already logged in, then redirect him to welcome page
       if(isset($_SESSION['user']['user_id']) )
@@ -60,5 +92,14 @@ class User extends CI_Controller {
       redirect(base_url().'admin/user/login','refresh');
 
    }
+   public function delete()
+	{
+		
+		$delete_id = $this->uri->segment(4) ? $this->uri->segment(4) : $this->input->get_post('delete_id');
+		
+		$this->user_model->delete($delete_id);
+		$_SESSION['msg_error'][] = 'User deleted successfully!';
+		redirect('admin/user/list', 'refresh');
+	}
 
 }

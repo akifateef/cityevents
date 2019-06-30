@@ -13,7 +13,7 @@ $this->load->view('admin/components/header');
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="<?php echo base_url()?>admin/user/index?page=index">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Events</li>
         </ol>
@@ -53,15 +53,10 @@ if($events->num_rows())
                 <?php }?>
                 </tbody>
               </table>
-              <?php }?>
+          <?php } ?>
             </div>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
 
-        <p class="small text-center text-muted my-5">
-          <em>More table examples coming soon...</em>
-        </p>
 
       </div>
       <!-- /.container-fluid -->

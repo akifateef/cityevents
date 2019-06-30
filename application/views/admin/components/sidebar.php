@@ -39,31 +39,20 @@
 <div id="wrapper">
 
 <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url()?>admin/user/index">
+      <li class="nav-item <?php if(@$_GET['page']=='index') { echo "active"; }?>">
+        <a class="nav-link" href="<?php echo base_url()?>admin/user/index?page=index">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-users"></i>
-          <span>Users</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-    
-          <a class="dropdown-item" href="<?php echo base_url()?>admin/user/list">Users List</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+      <li class="nav-item <?php if(@$_GET['page']=='event') { echo "active"; }?>">
+        <a class="nav-link" href="<?php echo base_url()?>admin/event/insert?page=event">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>Events</span></a>
+      </li>
+      <li class="nav-item <?php if(@$_GET['page']=='user') { echo "active"; }?>">
+        <a class="nav-link" href="<?php echo base_url()?>admin/user/list?page=user">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Users</span></a>
       </li>
     </ul>

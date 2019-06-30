@@ -17,3 +17,8 @@
   <!-- Demo scripts for this page-->
   <script src="<?php echo base_url()?>js/demo/datatables-demo.js"></script>
   <script src="<?php echo base_url()?>js/demo/chart-area-demo.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript" src='http://maps.google.com/maps/api/js?&key=AIzaSyC0UsNMtrx3Jj-I8N-XiocWwN1mRxb5_pI&sensor=false&libraries=places'></script>
+<script src="<?php echo base_url()?>js/locationpicker.jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
