@@ -45,13 +45,34 @@
           <span>Dashboard</span>
         </a>
       </li>
+      <?php 
+      
+      if($_SESSION['user']['id'] == '1')
+      {
+        $event_url = 'list?user_id='.$_SESSION['user']['id'];
+      }
+      else
+      {
+        $event_url = 'list';
+      }
+      ?>
       <li class="nav-item <?php if(@$_GET['page']=='event') { echo "active"; }?>">
-        <a class="nav-link" href="<?php echo base_url()?>admin/event/insert?page=event">
+        <a class="nav-link" href="<?php echo base_url()?>admin/event/<?php echo $event_url; ?>?page=event">
           <i class="fas fa-fw fa-table"></i>
           <span>Events</span></a>
       </li>
+      <?php 
+      if($_SESSION['user']['id'] != '1')
+      {
+        $url = 'update?id='.$_SESSION['user']['id'];
+      }
+      else
+      {
+        $url = 'list';
+      }
+      ?>
       <li class="nav-item <?php if(@$_GET['page']=='user') { echo "active"; }?>">
-        <a class="nav-link" href="<?php echo base_url()?>admin/user/list?page=user">
+        <a class="nav-link" href="<?php echo base_url()?>admin/user/<?php echo $url; ?>?&page=user">
           <i class="fas fa-fw fa-users"></i>
           <span>Users</span></a>
       </li>

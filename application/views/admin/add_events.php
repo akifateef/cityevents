@@ -49,35 +49,53 @@ $this->load->view('admin/components/header');
     <?php echo display_success_message(); ?>
 </div>
 <?php } ?>
-          <form  action="<?php echo base_url(); ?>admin/event/insert" method="post" enctype="multipart">
+          <form  action="<?php echo base_url(); ?>admin/event/insert" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-4">
+              <div class="col-md-6">
+                <input type="hidden" name="longitude" id="longitude"/>
+                <input type="hidden" name="latitude" id="latitude"/>
                   <input type="text" name="event_name" id="firstname" class="form-control" placeholder="Event name" required="required" autofocus="autofocus">
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                   <input type="text" name="datetime" class="form-control" placeholder="Select Date and Time" >
               </div>
-              <div class="col-md-4">
-                     <input type="text" name="event_address" id="event_address" class="form-control" data-target="#us6-dialog" data-toggle="modal" placeholder="Event address" required="required">
-              </div>
-            </div>
+                         </div>
           </div> 
+        
           <div class="form-group">
             <div class="form-row">
-                  <div class="col-md-6">
+          <div class="col-md-6">
+                     <input type="text" name="event_address" id="event_address" class="form-control" data-target="#us6-dialog" data-toggle="modal" placeholder="Event address" required="required">
+           </div>
+
+          <div class="col-md-6">
+              <select id="inputState" name="event_type_id" class="form-control">
+              <?php $event_types = $this->event_model->get_events_type();
+                                          foreach($event_types->result() as $event_type){ 
+                                    ?>
+                                    <option value="<?php echo $event_type->id; ?>" ><?php echo $event_type->name; ?></option>
+                                    <?php } ?>
+              </select>
+          </div>
+          </div>
+          </div> 
+        
+          <div class="form-group">
+            <div class="form-row">
+             <div class="col-md-6">
                      <textarea rows="12" name="description" class="form-control">Event Description</textarea>
                   </div>
                   <?php $image = base_url().'images/download.png';
                   ?>
                   <div class="col-md-6">
                     <img onclick="document.getElementById('image').click();" class="img-preview"  id="upload_preview" style="cursor:pointer;" src="<?php echo $image; ?>" width="300px" height="300px">
-							      <input onChange="readURL(this, 'upload_preview');" style="display:none;" type="file" name="image" id="image"  accept="image/*">
+							      <input onChange="readURL(this, 'upload_preview');" style="display:none;" type="file" name="user_file" size='20' id="image" />
                   </div>   
 
             </div>
         </div>
-          <button type="submit" class="btn btn-primary btn-block" >Register</button>
+          <button type="submit" class="btn btn-primary btn-block" >Add New Event</button>
         </form>
         </div>
 
@@ -163,6 +181,10 @@ $this->load->view('admin/components/scripts');
     $('#save').click(function () {
       $('#close').trigger('click');
       var address = $('#us3-address').val();
+      var long = $('#us3-lon').val();
+      var lat = $('#us3-lat').val();
+      $('#longitude').val(long);
+      $('#latitude').val(lat);
         $('#event_address').val(address); //Its showing
     })
   });
@@ -173,7 +195,7 @@ $(function() {
     startDate: moment().startOf('hour'),
     endDate: moment().startOf('hour').add(32, 'hour'),
     locale: {
-      format: 'DD/MM/YYYY HH:mm:ss'
+      format: 'YYYY/MM/DD HH:mm:ss'
     }
   });
 });

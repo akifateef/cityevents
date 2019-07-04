@@ -83,8 +83,11 @@ if($users->num_rows())
                     ?>
                     </td>
                     <td><?php echo $user->user_name; ?></td>
-                    <td><a href="<?php echo base_url(); ?>admin/user/update/?id=<?php echo  $user->id; ?>" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Update</a>
-                   <button id="<?php echo $user->id; ?>" class="btn btn-danger delete_button" data-toggle="modal" data-target="#DeleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete</button>
+                    <td>
+                    <a href="<?php echo base_url(); ?>admin/event/list?user_id=<?php echo  $user->id; ?>"class="btn btn-primary" ><i class="glyphicon glyphicon-info"></i>View User Events</a>
+                    
+                    <a href="<?php echo base_url(); ?>admin/user/update/?id=<?php echo  $user->id; ?>" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Update Profile</a>
+                   <button id="<?php echo $user->id; ?>" class="btn btn-danger delete_button" data-toggle="modal" data-target="#DeleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete Profile</button>
                       
                   </td>
                   </tr>

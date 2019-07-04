@@ -6,7 +6,7 @@ $this->load->view('admin/components/header');
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header">Login </div>
       <div class="card-body">
         <form name="userlogin" method="post" action="<?php echo base_url()?>admin/user/login">
           <div class="form-group">

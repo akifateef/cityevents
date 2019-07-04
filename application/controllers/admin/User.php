@@ -84,12 +84,12 @@ class User extends CI_Controller {
          }
 
 
-      $this->load->view('admin/login',$this->data);
+      $this->load->view('event/login',$this->data);
    }
    public function logout()
    {
       session_destroy();
-      redirect(base_url().'admin/user/login','refresh');
+      redirect(base_url().'event/login','refresh');
 
    }
    public function delete()
@@ -101,5 +101,26 @@ class User extends CI_Controller {
 		$_SESSION['msg_error'][] = 'User deleted successfully!';
 		redirect('admin/user/list', 'refresh');
 	}
+   public function insert() {
+  
+      $this->form_validation->set_error_delimiters('<div>', '</div>');
 
+      $this->form_validation->set_rules('email', 'Email', 'required|trim');
+      
+      // If the validation worked
+      if ($this->form_validation->run())
+      {    
+         $data['password'] =$this->input->get_post('password');
+         $data['f_name'] = $this->input->get_post('f_name');
+         $data['email'] = $this->input->get_post('email');
+         $data['l_name'] = $this->input->get_post('l_name');
+         $data['user_name'] = $this->input->get_post('user_name');
+         $data['user_type_id'] = '2';
+                    if($this->user_model->insert($data))
+            {               
+                          redirect('event/login?register=success');	
+            }
+              
+      }
+   }
 }

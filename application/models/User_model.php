@@ -36,8 +36,7 @@ class User_model extends CI_Model {
 
    public function insert($data)
 	{
-		$data['date_created'] = date('Y-m-d H:i:s');
-     // $data['created_by'] = $_SESSION['id'];
+		// $data['created_by'] = $_SESSION['id'];
       		if($this->db->insert('users', $data))
 		{
 			$id = $this->db->insert_id();
