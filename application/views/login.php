@@ -13,7 +13,7 @@
                 
                 <form class="form-login" method="POST" action="<?php echo base_url()?>admin/user/login">
                 <?php 
-if($_GET['register'] =='success'){
+if(@$_GET['register'] =='success'){
 ?>
 <div class="alert alert-success">
   <strong>You've registered Successfuly,</strong> Please Login Now !

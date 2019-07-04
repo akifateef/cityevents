@@ -4,7 +4,9 @@
 <br>
 <br>
 <br>
-            <div class="form-group" style="margin-top:140px">
+
+<form name="" action="<?php echo base_url()?>event/search" method="get" >           
+<div class="form-group" style="margin-top:140px">
             <div class="form-row">
             <div class="col-md-1">
           
@@ -16,14 +18,14 @@
           
               <div class="col-md-3">
               <label><b>Select Type</b></label>
-              <select id="inputState" style="background:white; color:black !important;" name="event_type_id" class="form-control">
+              <select id="inputState" style="background:white; color:black !important;" name="event_type" class="form-control">
               
               <option value="0" >All</option>
                                     
               <?php $event_types = $this->event_model->get_events_type();
                                           foreach($event_types->result() as $event_type){ 
                                     ?>
-                                    <option value="<?php echo $event_type->id; ?>" ><?php echo $event_type->name; ?></option>
+                                    <option value="<?php echo $event_type->name; ?>" ><?php echo $event_type->name; ?></option>
                                     <?php } ?>
               </select>
           </div>
@@ -36,6 +38,7 @@
             </div>
           </div> 
 
+          </form>
 
 <br>
 <br>

@@ -5,11 +5,14 @@
 <div class="wrap-content container" id="container">
 <br><br><br>
         <div class="row">
-                     <?php   if($events->num_rows())
-{ ?>
+        
+                     <?php  
+                 if($events != NULL){
+                     if(@$events->num_rows())
+                        { ?>
                            
                             <?php foreach($events->result() as $event)
-                 { ?>
+                                { ?>
 						        <div class="col-md-3">
 
 									<div class="panel panel-white no-radius text-center">
@@ -30,9 +33,15 @@
                                         </div>
                                     </div>
                                 </div>
-                 <?php } ?>
+                 <?php } 
+?>
                  </div>             
-<?php }?>
+<?php } 
+  }
+else {?>
+No Event found
+<?php
+} ?>
 	</div>
 <!-- start: FOOTER -->
 <br>

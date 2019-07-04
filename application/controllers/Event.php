@@ -32,7 +32,13 @@ class Event extends CI_Controller {
       $this->data['events'] = $this->event_model->get();
       $this->load->view('list',$this->data);
    }
+   public function search() {
 
+      $name = $this->input->get_post('event_name');
+      $type = $this->input->get_post('event_type');
+      $this->data['events'] = $this->event_model->search($name,$type);
+      $this->load->view('list',$this->data);
+   }
 
    public function details() {
 
