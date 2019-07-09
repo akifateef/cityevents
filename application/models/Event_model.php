@@ -6,15 +6,20 @@ class Event_model extends CI_Model {
       parent::__construct();
    }
 
-   public function get($user_id='',$event_id='') {
+   public function get($params = array(), $count_result = false) {
    
-    if($user_id != '')
-    {
-        $query = $this->db->get_where('view_event_details',array('user_id'=>$user_id));
-    }
-    else{
+      if($count_result)
+		{
+			$this->db->from('view_event_details');
+			$count = $this->db->count_all_results();
+			return $count;
+		}
+      if(isset($params['limit'])) { $this->db->limit($params['limit'], $params['offset']); }
+		if(isset($params['order_by'])){ $this->db->order_by($params['order_by'],$params['direction']); }
+		
       $query = $this->db->get('view_event_details');
-    }
+   
+    
      
    //my_var_dump($this->db->last_query());
       return $query;

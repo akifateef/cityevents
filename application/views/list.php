@@ -7,7 +7,6 @@
         <div class="row">
         
                      <?php  
-                 if($events != NULL){
                      if(@$events->num_rows())
                         { ?>
                            
@@ -34,10 +33,11 @@
                                     </div>
                                 </div>
                  <?php } 
+                  echo $pagination_links;
 ?>
                  </div>             
 <?php } 
-  }
+  
 else {?>
 No Event found
 <?php
