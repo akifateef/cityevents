@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                  <?php } 
-                  echo $pagination_links;
+                //  echo $pagination_links;
 ?>
                  </div>             
 <?php } 

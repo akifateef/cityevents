@@ -27,7 +27,7 @@ class Event extends CI_Controller {
    public function register() {
       $this->load->view('register');
    }
-   public function list() {
+   public function list1() {
       
 		$order_by = $this->input->get_post('order_by') ? $this->input->get_post('order_by') : 'id';
 		$direction = $this->input->get_post('direction') ? $this->input->get_post('direction') : 'DESC';
@@ -67,6 +67,14 @@ class Event extends CI_Controller {
 		$this->data['order_by'] = $order_by;
 		$this->data['direction'] = $direction;
 		$this->data['total_rows'] = $total_rows;
+		$this->data['events'] = $events;
+      $this->load->view('list',$this->data);
+   }
+
+   public function list() {
+      
+		
+		$events = $this->event_model->get();
 		$this->data['events'] = $events;
       $this->load->view('list',$this->data);
    }
