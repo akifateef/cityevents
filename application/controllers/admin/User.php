@@ -73,7 +73,7 @@ class User extends CI_Controller {
                   $this->load->library('session');
                  # Set session here and redirect user
                   $_SESSION['user'] = $user_detail;
-                  $redirect_url = isset($_SESSION['redirect_to_last_url']) ? $_SESSION['redirect_to_last_url'] : base_url().'admin/user/index';
+                  $redirect_url = isset($_SESSION['redirect_to_last_url']) ? $_SESSION['redirect_to_last_url'] : base_url().'admin/event/list';
                   unset($_SESSION['redirect_to_last_url']);
                   redirect($redirect_url,'location');
 

@@ -127,7 +127,7 @@ $fav = $_GET['fav'];
 <div class="slideshow-container">
 
 <div class="mySlides">
-  <img src="<?php echo base_url().'images/download.png';?>"  style="width:100%">
+  <img src="<?php echo base_url().'images/'.$event->image_path;?>"  style="width:100%">
  
 </div>
 
@@ -140,9 +140,6 @@ $fav = $_GET['fav'];
              <h5> Event Name:</h5><h4><?php echo $event->name; ?> 
              
              <br><p></p><?php echo $event->description; ?><br> </h4>
-             <br>
-              Location: <?php echo $event->location_name; ?><br>
-             Date: <?php echo $event->date_start; ?> till <?php echo $event->date_end; ?> 
              <?php
              if(@$_COOKIE['fav']== $event->id){
                ?>
@@ -157,6 +154,10 @@ $fav = $_GET['fav'];
                     
                     </form>
              <?php }?>
+             <br>
+              Location: <?php echo $event->location_name; ?><br>
+             Date: <?php echo $event->date_start; ?> till <?php echo $event->date_end; ?> 
+            
              <br>
              <input type="hidden" name="lat" id="lat" value="<?php echo $event->latitude; ?>"/>
              

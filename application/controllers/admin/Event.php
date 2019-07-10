@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Event extends CI_Controller {
 
    var $data;
-   var $image;
    public function __construct() {
       
       parent::__construct();
@@ -44,6 +43,22 @@ class Event extends CI_Controller {
 
       $this->form_validation->set_rules('event_name', 'Event Name', 'required|trim');
       
+     
+            $upload_path = './images/';
+				$config['upload_path'] = $upload_path;
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+				$config['encrypt_name'] = true;
+		
+				$this->load->library('upload', $config);
+				
+				# Try to upload file now
+				if ($this->upload->do_upload('image'))
+				{
+					# Get uploading detail here
+					$upload_detail = $this->upload->data();
+					
+               $image = $upload_detail['file_name'];
+            }
       // If the validation worked
       if ($this->form_validation->run())
       {    
@@ -57,14 +72,16 @@ class Event extends CI_Controller {
             $data['time_start'] = $datetime_start[1];
             $data['date_end'] = $datetime_end[1];
             $data['time_end'] = $datetime_end[2];
+            $images['image_path'] = $image;
             $address['address'] = $this->input->get_post('event_address');
             $address['latitude'] = $this->input->get_post('latitude');
             $address['longitude'] = $this->input->get_post('longitude');
             $data['event_type_id'] = $this->input->get_post('event_type_id');
-            if($this->event_model->insert($data,$address))
-            {               
-               $_SESSION['msg_success'][] = 'Event Added...';
-               redirect('admin/event');	
+            if($id = $this->event_model->insert($data,$address))
+            {              
+               $images['event_id'] = $id;
+               $this->event_model->upload_image($images);
+               redirect('admin/event/list');	
             }
               
       }
@@ -79,6 +96,22 @@ class Event extends CI_Controller {
 
    $this->form_validation->set_rules('event_name', 'Event Name', 'required|trim');
    
+   $upload_path = './images/';
+   $config['upload_path'] = $upload_path;
+   $config['allowed_types'] = 'gif|jpg|png|jpeg';
+   $config['encrypt_name'] = true;
+
+   $this->load->library('upload', $config);
+   
+   # Try to upload file now
+   if ($this->upload->do_upload('image'))
+   {
+      # Get uploading detail here
+      $upload_detail = $this->upload->data();
+      
+      $image = $upload_detail['file_name'];
+   }
+
    // If the validation worked
    if ($this->form_validation->run())
    {
@@ -92,17 +125,16 @@ class Event extends CI_Controller {
       $data['time_start'] = $datetime_start[1];
       $data['date_end'] = $datetime_end[1];
       $data['time_end'] = $datetime_end[2];
-      $data['location_id'] = '1';
+     // $images['image_path'] = $image;
       $address['address'] = $this->input->get_post('event_address');
       $address['latitude'] = $this->input->get_post('latitude');
       $address['longitude'] = $this->input->get_post('longitude');
       $data['event_type_id'] = $this->input->get_post('event_type_id');
          
-         if($this->event_model->update($event_id,$data))
+         if($this->event_model->update($event_id,$data,$address))
          {
-            
-            $_SESSION['msg_success'][] = 'Event Updated...';
-            redirect('admin/event/list');	
+
+           redirect('admin/event/list');	
          }
       
    

@@ -25,12 +25,19 @@ class Event_model extends CI_Model {
      $query= $this->db->query($query1); 
         return $query;
      }
-   public function update($event_id,$data)
+   public function update($event_id,$data,$address)
 	{ 
       
-     $this->db->where('id', $event_id);
-     return $this->db->update('events',$data);
-      //my_var_dump($this->db->last_query());
+      if($this->db->insert('location', $address))
+      {
+        if($location_id = $this->db->insert_id()){
+        
+         $data['location_id'] = $location_id;
+         $this->db->where('id', $event_id);
+         return $this->db->update('events',$data);
+      }
+      
+   }//my_var_dump($this->db->last_query());
    }
    public function insert($data,$address)
    {
@@ -44,17 +51,31 @@ class Event_model extends CI_Model {
          $data['location_id'] = $location_id;
          $this->db->insert('events', $data);
          $event_id = $this->db->insert_id();
+
          $user_event['event_id'] = $event_id;
          $user_event['user_id'] = $_SESSION['user']['id'];
          $this->db->insert('user_events', $user_event);
          $user_event_id = $this->db->insert_id();
+   
          return $event_id;
-        }
+      }
 
       }
      return false;
    }
-	
+   public function upload_image($image)
+   {
+   
+      if($this->db->insert('event_images', $image))
+      {
+         $image_id = $this->db->insert_id();
+        return $image_id;
+      }
+
+      return false;
+   }
+   
+  
 	public function get_events_type()
 	{
 		$this->db->order_by('name');

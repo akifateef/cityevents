@@ -90,7 +90,7 @@ $this->load->view('admin/components/header');
                   ?>
                   <div class="col-md-6">
                     <img onclick="document.getElementById('image').click();" class="img-preview"  id="upload_preview" style="cursor:pointer;" src="<?php echo $image; ?>" width="300px" height="300px">
-							      <input onChange="readURL(this, 'upload_preview');" style="display:none;" type="file" name="user_file" size='20' id="image" />
+							      <input onChange="readURL(this, 'upload_preview');" style="display:none;" type="file" name="image" size='20' id="image" />
                   </div>   
 
             </div>
