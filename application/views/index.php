@@ -13,7 +13,7 @@
 </div>
               <div class="col-md-5">
                 <label><b>Search Name</b></label>
-                  <input type="text" style="background:white;" name="event_name" id="firstname" class="form-control" placeholder="Event name" required="required" autofocus="autofocus">
+                  <input type="text" style="background:black;" name="event_name" id="firstname" class="form-control" placeholder="Event name" required="required" autofocus="autofocus">
               </div>
           
               <div class="col-md-3">
