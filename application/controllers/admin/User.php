@@ -84,7 +84,7 @@ class User extends CI_Controller {
          }
 
 
-      $this->load->view('event/login',$this->data);
+      $this->load->view('login',$this->data);
    }
    public function logout()
    {

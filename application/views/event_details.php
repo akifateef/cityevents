@@ -99,6 +99,13 @@ img {vertical-align: middle;}
   .prev, .next,.text {font-size: 11px}
 }
 </style>
+ <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 400px   /* The width is the width of the web page */
+       }
+    </style>
 </head>
 <br>
 <br>
@@ -108,6 +115,14 @@ img {vertical-align: middle;}
 <br>
 <br>
 <body>
+<?php
+
+if(isset($_GET['fav']))
+{
+$fav = $_GET['fav'];
+  setcookie('fav', $fav, time() + 360000, '/');
+}
+?>
 
 <div class="slideshow-container">
 
@@ -121,15 +136,37 @@ img {vertical-align: middle;}
 
 <div style="text-align:center">
               
-              
-            
-             <h5> Event Name:</h5><h4><?php echo $event->name; ?> <br><p></p><?php echo $event->description; ?><br> </h4> 
-              
-              <br>
+           
+             <h5> Event Name:</h5><h4><?php echo $event->name; ?> 
+             
+             <br><p></p><?php echo $event->description; ?><br> </h4>
+             <br>
               Location: <?php echo $event->location_name; ?><br>
-             Date: <?php echo $event->date_start; ?> till <?php echo $event->date_end; ?>
-
-            
+             Date: <?php echo $event->date_start; ?> till <?php echo $event->date_end; ?> 
+             <?php
+             if(@$_COOKIE['fav']== $event->id){
+               ?>
+               <span class="badge badge-success">My Favorite Event</span>
+               <?php
+             }
+             else{
+             ?>
+                 <form name="" id="formId" method="get">
+                       <input type="hidden" name="fav" id="cook" value="<?php echo $event->id?>" />
+  											<input type="submit" class="btn btn-primary"  id="add_fav" value="Add to Favorite">
+                    
+                    </form>
+             <?php }?>
+             <br>
+             <input type="hidden" name="lat" id="lat" value="<?php echo $event->latitude; ?>"/>
+             
+             <input type="hidden" name="long" id="long" value="<?php echo $event->longitude; ?>"/>
+             <?php 
+             if($event->latitude != ''){
+                  ?>
+          <div id="map" style="margin-left: 1100px"></div>
+            <?php }?>
+             <br>
           </div>
         </div>
       
@@ -137,6 +174,7 @@ img {vertical-align: middle;}
 
 
 <script>
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -173,3 +211,26 @@ function showSlides(n) {
 <br>
             
   <?php include'footer.php';?>
+  <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var lat = $('#lat').val();
+  var long = $('#long').val();
+  var uluru = {lat: parseFloat(lat), lng: parseFloat(long)};
+  console.log(uluru);
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 15, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0UsNMtrx3Jj-I8N-XiocWwN1mRxb5_pI&callback=initMap">
+    </script>

@@ -78,6 +78,11 @@ class Event extends CI_Controller {
 		$this->data['events'] = $events;
       $this->load->view('list',$this->data);
    }
+   public function about() {
+      
+	
+      $this->load->view('about');
+   }
    public function search() {
 
       $name = $this->input->get_post('event_name');
@@ -90,6 +95,10 @@ class Event extends CI_Controller {
 
       
       $id = $this->input->get_post('id');
+      if(!isset($id))
+      {
+      $id = $this->input->get_post('fav');
+       }
       $this->data['event'] = $this->event_model->get_event_by_id($id);
       $this->load->view('event_details',$this->data);
    }

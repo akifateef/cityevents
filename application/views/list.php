@@ -1,6 +1,10 @@
 <?php include 'header.php'; ?>
 <br><br><br>
-
+<?php
+$cookie_name = "add_to_fav";
+$cookie_value = "";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+?>
      
 <div class="wrap-content container" id="container">
 <br><br><br>
@@ -22,6 +26,7 @@
 										<!-- <p>
 										<span class="badge fa-2x">2</span>
 										</p> -->
+										
 											<p class="links">
 												<button class="btn btn-primary btn-o cl-effect-7">
 												<a href="<?php echo base_url()?>event/details?id=<?php echo $event->id; ?>">
