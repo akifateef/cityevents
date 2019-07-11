@@ -8,7 +8,9 @@ class Event_model extends CI_Model {
 
    public function get() {
    
+      $this->db->order_by('id','DESC');
       $query = $this->db->get('view_event_details');
+//my_var_dump($this->db->last_query());
       return $query;
    }
    public function search($name,$type) {

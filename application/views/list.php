@@ -14,7 +14,7 @@
 						        <div class="col-md-3">
 
 <?php 
-if($event->image != '')
+if($event->image_path != '')
 {
 	$image = $event->image_path;
 }
