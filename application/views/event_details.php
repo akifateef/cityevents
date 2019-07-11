@@ -129,7 +129,7 @@ $fav = $_GET['fav'];
 <div class="mySlides">
 
 <?php 
-if($event->image != '')
+if($event->image_path != '')
 {
 	$image = $event->image_path;
 }
