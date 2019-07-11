@@ -175,7 +175,7 @@ else {
              <?php 
              if($event->latitude != ''){
                   ?>
-          <div id="map" style="margin-left: 1100px"></div>
+          <div id="map" style="margin-left: 600px"></div>
             <?php }?>
              <br>
           </div>
