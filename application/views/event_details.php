@@ -127,7 +127,17 @@ $fav = $_GET['fav'];
 <div class="slideshow-container">
 
 <div class="mySlides">
-  <img src="<?php echo base_url().'images/'.$event->image_path;?>"  style="width:100%">
+
+<?php 
+if($event->image != '')
+{
+	$image = $event->image_path;
+}
+else {
+	$image = 'download.png';
+}
+?>
+  <img src="<?php echo base_url().'images/'.$image;?>"  style="width:100%">
  
 </div>
 

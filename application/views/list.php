@@ -1,11 +1,6 @@
 <?php include 'header.php'; ?>
 <br><br><br>
-<?php
-$cookie_name = "add_to_fav";
-$cookie_value = "";
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-?>
-     
+
 <div class="wrap-content container" id="container">
 <br><br><br>
         <div class="row">
@@ -18,9 +13,18 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1
                                 { ?>
 						        <div class="col-md-3">
 
+<?php 
+if($event->image != '')
+{
+	$image = $event->image_path;
+}
+else {
+	$image = 'download.png';
+}
+?>
 									<div class="panel panel-white no-radius text-center">
 										<div class="panel-body">
-                                            <img src="<?php echo base_url().'images/download.png';?>" >
+                                            <img src="<?php echo base_url().'images/'.$image;?>" >
 											<span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-tasks fa-stack-1x fa-inverse"></i> </span>
 											<h3 class="StepTitle"><?php echo $event->name; ?></h3>
 										<!-- <p>
